@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Absensi SPPG Pagesangan Timur</title>
     
-    <!-- Favicon (Opsional: Ikon Browser) -->
+    <!-- Favicon -->
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Garuda_Pancasila_Coat_of_Arms_of_Indonesia.svg/200px-Garuda_Pancasila_Coat_of_Arms_of_Indonesia.svg.png" type="image/png">
 
     <style>
@@ -15,7 +15,8 @@
             padding: 0;
             height: 100%;
             overflow: hidden; /* Hilangkan scrollbar ganda */
-            background-color: #f4f7f6;
+            background-color: #071e49; /* Warna dasar BGN */
+            font-family: Arial, sans-serif;
         }
         
         /* Gaya Iframe */
@@ -26,17 +27,51 @@
             width: 100%;
             height: 100%;
             border: none;
+            z-index: 1;
+        }
+
+        /* Tombol Darurat Khusus Mobile (Mencegah Iframe Block) */
+        #fallback-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #d1b06c; /* Warna Emas BGN */
+            color: #071e49; /* Teks Biru Gelap */
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: none; /* Sembunyikan di PC */
+            text-align: center;
+            width: max-content;
+        }
+
+        /* Hanya tampilkan tombol di layar HP */
+        @media (max-width: 768px) {
+            #fallback-btn {
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- GANTI LINK 'SRC' DI BAWAH INI DENGAN LINK GOOGLE SCRIPT ANDA -->
+    <!-- IFRAME APLIKASI (Syntax Allow diperbarui untuk Mobile) -->
     <iframe 
         id="app-frame"
         src="https://script.google.com/macros/s/AKfycbzqjjvdV7qgltL4NodbN1ePLCf4HTAaDF-DCeX94W6Fq_Y5KZALE_oEtC1Ca42ASGz02g/exec"
-        allow="geolocation *; microphone *; camera *; midi *; encrypted-media *;"
+        allow="camera; geolocation; microphone; fullscreen"
     ></iframe>
+
+    <!-- TOMBOL FALLBACK -->
+    <!-- Jika browser HP memblokir kamera/GPS di dalam iframe, tombol ini akan menyelamatkannya -->
+    <a id="fallback-btn" href="https://script.google.com/macros/s/AKfycbzqjjvdV7qgltL4NodbN1ePLCf4HTAaDF-DCeX94W6Fq_Y5KZALE_oEtC1Ca42ASGz02g/exec" target="_blank">
+        🚀 Buka Layar Penuh (Jika Blank/Error)
+    </a>
 
 </body>
 </html>
